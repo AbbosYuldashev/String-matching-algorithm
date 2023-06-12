@@ -1,27 +1,23 @@
-#include <iostream>
-#include <string>
-
-int naiveStringMatch(const std::string& text, const std::string& pattern) {
-    int n = text.length();
-    int m = pattern.length();
-    for (int i = 0; i <= n - m; i++) {
+#include <iostream>#include <fstream>
+#include <string>#include <chrono>
+void NaiveSearch(const std::string& text, const std::string& pattern) {
+    int M = pattern.length();    int N = text.length();
+    for (int i = 0; i <= N - M; i++) {
         int j;
-        for (j = 0; j < m; j++) {
-            if (text[i + j] != pattern[j])
-                break;
-        }
-        if (j == m)
-            return i; 
-    }
-    return -1; 
-}
+        for (j = 0; j < M; j++) {            if (text[i + j] != pattern[j])
+                break;        }
+        if (j == M) {
+            std::cout << "Pattern found at index " << i << std::endl;        }
+    }}
 int main() {
-    std::string text = "Hello, world!";
-    std::string pattern = "world";
-    int matchIndex = naiveStringMatch(text, pattern);
-    if (matchIndex != -1)
-        std::cout << "Pattern found at index: " << matchIndex << std::endl;
-    else
-        std::cout << "Pattern not found." << std::endl;
+    std::ifstream file("strings.txt");    std::string text;
+    if (!file.is_open()) {
+        std::cerr << "Unable to open file" << std::endl;        return 1;
+    }
+    text.assign(std::istreambuf_iterator<char>(file), std::istreambuf_iterator<char>());
+    std::string pattern = "DcoCtUkT4m";
+    auto start = std::chrono::high_resolution_clock::now();    NaiveSearch(text, pattern);
+    auto end = std::chrono::high_resolution_clock::now();    auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
+    std::cout << "Execution time: " << duration << " nanoseconds" << std::endl;
     return 0;
 }

@@ -20,7 +20,7 @@ void NaiveSearch(const std::string& text, const std::string& pattern) {
     }
     
 }
-int mains() {
+int main() {
     std::ifstream file("strings.txt");
     std::string text;
     if (!file.is_open()) {

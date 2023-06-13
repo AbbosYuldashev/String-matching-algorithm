@@ -43,7 +43,7 @@ void BoyerMooreSearch(const std::string& text, const std::string& pattern) {
     
 }
 
-int mainss() {
+int main() {
     std::ifstream file("strings.txt");
     std::string text;
 
